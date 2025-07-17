@@ -1,0 +1,132 @@
+{
+  "name": "My Subway",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Get stops",
+      "filename": "Get stops.bru",
+      "seq": 2,
+      "request": {
+        "url": "{{mysubway.root}}/stops?name=downtown cr",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "name",
+            "value": "downtown cr",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get stop by id",
+      "filename": "Get stop by id.bru",
+      "seq": 3,
+      "request": {
+        "url": "{{mysubway.root}}/stops/:id",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "id",
+            "value": "place-kencl",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get connections",
+      "filename": "Get connections.bru",
+      "seq": 4,
+      "request": {
+        "url": "{{mysubway.root}}/connections?stop_id=place-north",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "stop_id",
+            "value": "place-north",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "root": {
+    "request": {
+      "vars": {
+        "req": [
+          {
+            "name": "mysubway.root",
+            "value": "http://localhost:8080/api/v1",
+            "enabled": true,
+            "local": false,
+            "uid": "46jW23MB4eRW6stomQ3e5"
+          }
+        ]
+      }
+    }
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "My Subway",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.000415802001953125,
+    "filesCount": 3
+  }
+}

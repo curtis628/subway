@@ -1,0 +1,829 @@
+{
+  "name": "MBTA Subway",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Get facilities",
+      "filename": "Get facilities.bru",
+      "seq": 15,
+      "request": {
+        "url": "{{mbta.root}}/facilities",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get line",
+      "filename": "Get line.bru",
+      "seq": 3,
+      "request": {
+        "url": "{{mbta.root}}/lines/:id?fields[line]=long_name&include=routes",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "fields[line]",
+            "value": "long_name",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "include",
+            "value": "routes",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "id",
+            "value": "line-Green",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Line)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get lines",
+      "filename": "Get lines.bru",
+      "seq": 2,
+      "request": {
+        "url": "{{mbta.root}}/lines?fields[line]=long_name&sort=-long_name",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "fields[line]",
+            "value": "long_name",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "sort",
+            "value": "-long_name",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "page[limit]",
+            "value": "2",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "page[offset]",
+            "value": "0",
+            "type": "query",
+            "enabled": false
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Line)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get parent stop",
+      "filename": "Get parent stop.bru",
+      "seq": 14,
+      "request": {
+        "url": "{{mbta.root}}/stops/:id?include=child_stops,connecting_stops,parent_station",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "include",
+            "value": "child_stops,connecting_stops,parent_station",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "fields[stop]",
+            "value": "description,latitude,longitude,vehicle_type",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "filter[route_type]",
+            "value": "",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "child_stops,connecting_stops,facilities,parent_station",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "id",
+            "value": "place-rbmnl",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Stop)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get route pattern",
+      "filename": "Get route pattern.bru",
+      "seq": 7,
+      "request": {
+        "url": "{{mbta.root}}/route_patterns/:id?include=route,representative_trip",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "include",
+            "value": "route,representative_trip",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "fields[route_pattern]",
+            "value": "name,direction_id",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "id",
+            "value": "Green-B-816-0",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/RoutePattern)\n\nList of route patterns.\n\nRoute patterns are used to describe the subsets of a route, representing different possible patterns of where trips may serve. For example, a bus route may have multiple branches, and each branch may be modeled as a separate route pattern per direction. Hierarchically, the route pattern level may be considered to be larger than the trip level and smaller than the route level.\n\nFor most MBTA modes, a route pattern will typically represent a unique set of stops that may be served on a route-trip combination. Seasonal schedule changes may result in trips within a route pattern having different routings. In simple changes, such a single bus stop removed or added between one schedule rating and the next (for example, between the Summer and Fall schedules), trips will be maintained on the same route_pattern_id. If the changes are significant, a new route_pattern_id may be introduced.\n\nFor Commuter Rail, express or skip-stop trips use the same route pattern as local trips. Some branches do have multiple route patterns when the train takes a different path. For example, CR-Providence has two route patterns per direction, one for the Wickford Junction branch and the other for the Stoughton branch.",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get route patterns",
+      "filename": "Get route patterns.bru",
+      "seq": 6,
+      "request": {
+        "url": "{{mbta.root}}/route_patterns?filter[route]=Red",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "filter[route]",
+            "value": "Red",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "fields[route_pattern]",
+            "value": "name,direction_id",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "route,representative_trip",
+            "type": "query",
+            "enabled": false
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/RoutePattern)\n\nList of route patterns.\n\nRoute patterns are used to describe the subsets of a route, representing different possible patterns of where trips may serve. For example, a bus route may have multiple branches, and each branch may be modeled as a separate route pattern per direction. Hierarchically, the route pattern level may be considered to be larger than the trip level and smaller than the route level.\n\nFor most MBTA modes, a route pattern will typically represent a unique set of stops that may be served on a route-trip combination. Seasonal schedule changes may result in trips within a route pattern having different routings. In simple changes, such a single bus stop removed or added between one schedule rating and the next (for example, between the Summer and Fall schedules), trips will be maintained on the same route_pattern_id. If the changes are significant, a new route_pattern_id may be introduced.\n\nFor Commuter Rail, express or skip-stop trips use the same route pattern as local trips. Some branches do have multiple route patterns when the train takes a different path. For example, CR-Providence has two route patterns per direction, one for the Wickford Junction branch and the other for the Stoughton branch.\n\n",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get route",
+      "filename": "Get route.bru",
+      "seq": 5,
+      "request": {
+        "url": "{{mbta.root}}/routes/:id",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "include",
+            "value": "line,route_patterns",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "fields[route]",
+            "value": "description,type",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "id",
+            "value": "Green-E",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Route)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get routes",
+      "filename": "Get routes.bru",
+      "seq": 4,
+      "request": {
+        "url": "{{mbta.root}}/routes?filter[type]=0,1&include=stop",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "filter[type]",
+            "value": "0,1",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "include",
+            "value": "stop",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "filter[stop]",
+            "value": "place-north",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "fields[route]",
+            "value": "long_name",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "page[limit]",
+            "value": "10",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "page[offset]",
+            "value": "0",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "stop,line,route_patterns",
+            "type": "query",
+            "enabled": false
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Route)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get service",
+      "filename": "Get service.bru",
+      "seq": 11,
+      "request": {
+        "url": "{{mbta.root}}/services/:id",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "fields[service]",
+            "value": "fields[service]",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "id",
+            "value": "RTL32025-hms35011-Weekday-01",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Service)\n\nList of services. Service represents the days of the week, as well as extra days, that a trip is valid.",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get services",
+      "filename": "Get services.bru",
+      "seq": 10,
+      "request": {
+        "url": "{{mbta.root}}/services?filter[route]=Red",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "filter[route]",
+            "value": "Red",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "fields[service]",
+            "value": "description",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "route,service,route_pattern,stops",
+            "type": "query",
+            "enabled": false
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Service)\n\nList of services. Service represents the days of the week, as well as extra days, that a trip is valid.",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get shapes",
+      "filename": "Get shapes.bru",
+      "seq": 16,
+      "request": {
+        "url": "{{mbta.root}}/shapes?filter[route]=Green-B",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "filter[route]",
+            "value": "Green-B",
+            "type": "query",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Line)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get stop",
+      "filename": "Get stop.bru",
+      "seq": 13,
+      "request": {
+        "url": "{{mbta.root}}/stops/:id",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "include",
+            "value": "connecting_stops",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "fields[stop]",
+            "value": "description,latitude,longitude,vehicle_type",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "filter[route_type]",
+            "value": "",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "child_stops,connecting_stops,facilities,parent_station",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "id",
+            "value": "place-asmnl",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Stop)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get stops",
+      "filename": "Get stops.bru",
+      "seq": 12,
+      "request": {
+        "url": "{{mbta.root}}/stops",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "filter[route]",
+            "value": "Blue",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "child_stops",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "filter[route_type]",
+            "value": "0,1",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "filter[location_type]",
+            "value": "0",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "fields[stop]",
+            "value": "description,latitude,longitude,vehicle_type",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "filter[service]",
+            "value": "RTL32025-hms35011-Weekday-01",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "child_stops,connecting_stops,parent_station,route",
+            "type": "query",
+            "enabled": false
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Stop)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get trip",
+      "filename": "Get trip.bru",
+      "seq": 9,
+      "request": {
+        "url": "{{mbta.root}}/trips/:id?include=stops",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "include",
+            "value": "stops",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "fields[trip]",
+            "value": "",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "route,service,route_pattern,stops",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "id",
+            "value": "Red-15-Saturday-3d758-0-05:33:00",
+            "type": "path",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Trip)\n\nNOTE: A id, route, route_pattern, or name filter MUST be present for any trips to be returned.",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get trips",
+      "filename": "Get trips.bru",
+      "seq": 8,
+      "request": {
+        "url": "{{mbta.root}}/trips?include=stops&filter[route]=Red",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "include",
+            "value": "stops",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "filter[route]",
+            "value": "Red",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "filter[route_pattern]",
+            "value": "Red-1-0",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "fields[trip]",
+            "value": "",
+            "type": "query",
+            "enabled": false
+          },
+          {
+            "name": "include",
+            "value": "route,vehicle,service,route_pattern,stops,occupancies",
+            "type": "query",
+            "enabled": false
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Trip)\n\nNOTE: A id, route, route_pattern, or name filter MUST be present for any trips to be returned.",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get vehicles",
+      "filename": "Get vehicles.bru",
+      "seq": 17,
+      "request": {
+        "url": "{{mbta.root}}/vehicles?filter[route]=Green-B",
+        "method": "GET",
+        "headers": [],
+        "params": [
+          {
+            "name": "filter[route]",
+            "value": "Green-B",
+            "type": "query",
+            "enabled": true
+          },
+          {
+            "name": "include",
+            "value": "trip,stop,route",
+            "type": "query",
+            "enabled": false
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "[Swagger](https://api-v3.mbta.com/docs/swagger/index.html#/Vehicle)",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "activeEnvironmentUid": "4c6nDzUZOSMV6NybD8xqS",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "mbta.apikey",
+          "value": "",
+          "enabled": true,
+          "secret": true,
+          "type": "text"
+        }
+      ],
+      "name": "mbta.com"
+    }
+  ],
+  "root": {
+    "request": {
+      "headers": [
+        {
+          "name": "x-api-key",
+          "value": "{{mbta.apikey}}",
+          "enabled": true,
+          "uid": "zxGTsPBEZr7hTe9ck7hZj"
+        }
+      ],
+      "vars": {
+        "req": [
+          {
+            "name": "mbta.root",
+            "value": "https://api-v3.mbta.com",
+            "enabled": true,
+            "local": false,
+            "uid": "jD26XtWSBSdcBTGCg9Wnj"
+          }
+        ]
+      }
+    },
+    "docs": "- [MBTA API](https://www.mbta.com/developers/v3-api)\n- [Swagger](https://api-v3.mbta.com/docs/swagger/index.html)"
+  },
+  "brunoConfig": {
+    "version": "1",
+    "name": "MBTA Subway",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.008386611938476562,
+    "filesCount": 18
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "info": {
+    "name": "My Subway",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get stops",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{mysubway.root}}/stops?name=downtown cr",
+          "protocol": "",
+          "host": [
+            "{{mysubway",
+            "root}}"
+          ],
+          "path": [
+            "stops?name=downtown cr"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "downtown cr"
+            }
+          ],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "Get stop by id",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{mysubway.root}}/stops/:id",
+          "protocol": "",
+          "host": [
+            "{{mysubway",
+            "root}}"
+          ],
+          "path": [
+            "stops",
+            ":id"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "key": "id",
+              "value": "place-kencl"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get connections",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "{{mysubway.root}}/connections?stop_id=place-north",
+          "protocol": "",
+          "host": [
+            "{{mysubway",
+            "root}}"
+          ],
+          "path": [
+            "connections?stop_id=place-north"
+          ],
+          "query": [
+            {
+              "key": "stop_id",
+              "value": "place-north"
+            }
+          ],
+          "variable": []
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "mysubway.root",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
