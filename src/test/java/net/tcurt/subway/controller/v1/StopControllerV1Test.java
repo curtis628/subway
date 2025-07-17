@@ -5,8 +5,10 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import net.tcurt.subway.DataResetService;
 import net.tcurt.subway.entity.Stop;
 import net.tcurt.subway.service.SubwayService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ public class StopControllerV1Test {
 
   @Autowired private MockMvc mockMvc;
   @Autowired private SubwayService subwayService;
+  @Autowired private DataResetService dataResetService;
 
   @BeforeEach
   void setup() {
@@ -32,6 +35,11 @@ public class StopControllerV1Test {
     subwayService.getOrCreateStop(stop1);
     subwayService.getOrCreateStop(stop2);
     subwayService.getOrCreateStop(stop3);
+  }
+
+  @AfterEach
+  void cleanup() {
+    dataResetService.deleteAllData();
   }
 
   @Test

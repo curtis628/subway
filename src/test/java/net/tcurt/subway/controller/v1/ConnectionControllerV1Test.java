@@ -7,12 +7,13 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Arrays;
+import net.tcurt.subway.DataResetService;
 import net.tcurt.subway.entity.Connection;
 import net.tcurt.subway.entity.Line;
 import net.tcurt.subway.entity.Stop;
 import net.tcurt.subway.service.SubwayService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ConnectionControllerV1Test {
 
   @Autowired private MockMvc mockMvc;
   @Autowired private SubwayService subwayService;
-  @Autowired private ObjectMapper mapper;
+  @Autowired private DataResetService dataResetService;
 
   /**
    * Connections are as below. Vertical connections ({@code |}) are associated with the {@code
@@ -64,6 +65,11 @@ public class ConnectionControllerV1Test {
     Connection db = Connection.builder().from(stopD).to(stopB).line(horizontal).build();
     Arrays.asList(ab, ba, bc, cb, bd, db)
         .forEach(c -> subwayService.getOrCreateConnection(c.getFrom(), c.getTo(), c.getLine()));
+  }
+
+  @AfterEach
+  void cleanup() {
+    dataResetService.deleteAllData();
   }
 
   @Test
