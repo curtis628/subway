@@ -1,5 +1,6 @@
 <configuration>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="net.tcurt.subway.logging.SqlStateFilter"/>
         <encoder>
             <pattern>
                 %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
@@ -13,9 +14,6 @@
     <logger name="org.springframework.web" level="debug" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
-
-    <!-- There are expected unique constraint violations... so just ignoring these for now. -->
-    <logger name="org.hibernate.engine.jdbc.spi.SqlExceptionHelper" level="OFF"/>
 
     <root level="info">
         <appender-ref ref="CONSOLE"/>
