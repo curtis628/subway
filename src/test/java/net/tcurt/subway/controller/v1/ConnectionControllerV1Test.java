@@ -80,7 +80,7 @@ public class ConnectionControllerV1Test {
     mockMvc
         .perform(get("/api/v1/connections?stop_id=not-there"))
         .andExpect(status().isNotFound())
-        .andExpect(content().string("stop not found: not-there"));
+        .andExpect(content().string("Stop not found: not-there"));
   }
 
   @Test

@@ -100,7 +100,7 @@ public class SubwayService {
   public List<ConnectionDto> getConnectionsFromStop(String stopId) {
     stopRepository
         .findById(stopId)
-        .orElseThrow(() -> new EntityNotFoundException("stop not found: " + stopId));
+        .orElseThrow(() -> new EntityNotFoundException("Stop not found: " + stopId));
     List<Connection> connections =
         connectionRepository.findByFromId(stopId, Sort.by("line.name").ascending());
     return connections.stream().map(ConnectionDto::fromEntity).collect(Collectors.toList());
