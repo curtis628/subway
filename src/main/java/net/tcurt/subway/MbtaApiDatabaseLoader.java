@@ -92,7 +92,16 @@ public class MbtaApiDatabaseLoader {
       for (JsonNode trip : tripsData) {
         String id = trip.get("id").asText();
         JsonNode relationships = trip.get("relationships");
-        String routePattern = relationships.get("route_pattern").get("data").get("id").asText();
+        JsonNode routePatternId = relationships.get("route_pattern").get("data").get("id");
+        if (!routePatternId.isTextual()) {
+          log.error(
+              "No route_pattern id found for line={} trip={}. relationships: {}",
+              line,
+              trip,
+              relationships);
+          throw new RuntimeException("Cannot find route_pattern id");
+        }
+        String routePattern = routePatternId.asText();
         ArrayNode tripStops = (ArrayNode) relationships.get("stops").get("data");
         int stopNum = tripStops.size();
         if (stopNum == 0) {
