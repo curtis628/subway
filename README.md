@@ -162,4 +162,4 @@ Once the app is running, Swagger UI is available at:
 Tyler Curtis: [LinkedIn](https://www.linkedin.com/in/tjcurtis) • [GitHub](https://github.com/curtis628)
 
 ## 📝 License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
