@@ -93,7 +93,7 @@ public class MbtaApiDatabaseLoader {
         String id = trip.get("id").asText();
         JsonNode relationships = trip.get("relationships");
         JsonNode routePatternId = relationships.get("route_pattern").get("data").get("id");
-        if (!routePatternId.isTextual()) {
+        if (routePatternId == null || !routePatternId.isTextual()) {
           log.error(
               "No route_pattern id found for line={} trip={}. relationships: {}",
               line,
