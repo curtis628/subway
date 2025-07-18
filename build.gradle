@@ -77,5 +77,5 @@ tasks.named('check') {
 bootRun {
 	def profile = env.fetch("SPRING_PROFILES_ACTIVE", "default")
 	environment "SPRING_PROFILES_ACTIVE", profile
-	environment "MBTA_API_KEY", env.fetch("MBTA_API_KEY")
+	environment "MBTA_API_KEY", env.fetch("MBTA_API_KEY", "")
 }

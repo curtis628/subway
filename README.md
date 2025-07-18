@@ -1,4 +1,6 @@
 # 🚇 Subway API
+[![CI](https://github.com/curtis628/subway/actions/workflows/gradle.yml/badge.svg)](https://github.com/curtis628/subway/actions/workflows/gradle.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A personal project that showcases Spring Boot technologies working together to solve a semi-meaningful problem —
 building an API that programmatically reconstructs the [MBTA Subway Map](https://www.mbta.com/subway-map)
@@ -40,8 +42,16 @@ curl --silent 'http://localhost:8080/api/v1/connections?stop_id=place-dwnxg' | j
     "to": { "id": "place-state", "name": "State", ... }
   },
   {
+    "line": "Orange",
+    "to": { "id": "place-chncl", "name": "Chinatown", ... }
+  },
+  {
     "line": "Red",
     "to": { "id": "place-sstat", "name": "South Station", ... }
+  },
+  {
+    "line": "Red",
+    "to": { "id": "place-pktrm", "name": "Park Street", ... }
   }
 ]
 ```
