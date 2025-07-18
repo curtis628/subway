@@ -71,7 +71,7 @@ MBTA_API_KEY=your_api_key_here
 SPRING_PROFILES_ACTIVE=filedb
 ```
 > ✅ Note: Without `MBTA_API_KEY`, the app will likely fail on startup with `429 TOO_MANY_REQUESTS` due to MBTA API rate
-> limiting during DB initialization.
+> limiting during [DB initialization](src/main/java/net/tcurt/subway/MbtaApiDatabaseLoader.java)
 
 2. Run the application
 ```shell
